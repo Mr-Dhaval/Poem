@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Kessiiee!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Happy Birthday, My Love!</h1>
+    <div id="countdown">
+      <div><span id="days">00</span><small>Days</small></div>
+      <div><span id="hours">00</span><small>Hours</small></div>
+      <div><span id="mins">00</span><small>Minutes</small></div>
+      <div><span id="secs">00</span><small>Seconds</small></div>
+    </div>
+    <p class="note">
+      Dear Kessiiee,<br>
+      Every moment with you is a blessing. Your smile is my peace, your laugh is my favorite sound.<br>
+      Happy Birthday, my love. This page is just a small way to say how much I adore you.
+    </p>
+    <div class="poem">
+      <h2>A Birthday Poem for You</h2>
+      <p>In every smile, a thousand suns arise,</p>
+      <p>Your laughter—melody that fills my skies.</p>
+      <p>On this day, the world was graced with light,</p>
+      <p>Because you were born—to make my heart take flight.</p>
+      <p>May every wish you ever whisper true,</p>
+      <p>Blossom into dreams I build for you.</p>
+    </div>
+    <section class="gallery">
+      <h2>Moments with You</h2>
+      <div class="photos">
+        <img src="photo1.jpg" alt="Kessiiee smiling">
+        <img src="photo2.jpg" alt="Kessiiee selfie">
+        <img src="photo3.jpg" alt="Kessiiee portrait">
+        <img src="photo4.jpg" alt="Kessiiee cute shot">
+        <img src="photo5.jpg" alt="Kessiiee happy">
+      </div>
+    </section>
+    <button id="open-letter">Open Your Surprise 🎁</button>
+    <div id="love-letter">
+      <h2>To My Dearest Kessiiee,</h2>
+      <p>Every sunrise reminds me of your smile, every sunset wonders at your grace. You are my today and all of my tomorrows. Happy Birthday, my love. ❤️</p>
+    </div>
+  </div>
+  <audio id="bg-music" autoplay loop hidden>
+    <source src="tenu-sang-rakhna.mp3" type="audio/mpeg">
+  </audio>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // Countdown
+    const birthday = new Date('2025-05-01T00:00:00');
+    const daysEl = document.getElementById('days'),
+          hrsEl  = document.getElementById('hours'),
+          minEl  = document.getElementById('mins'),
+          secEl  = document.getElementById('secs');
+    function updateCountdown() {
+      const now = new Date(),
+            diff = birthday - now;
+      if (diff < 0) return;
+      const d = Math.floor(diff/1000/60/60/24),
+            h = Math.floor((diff/1000/60/60) % 24),
+            m = Math.floor((diff/1000/60) % 60),
+            s = Math.floor((diff/1000) % 60);
+      daysEl.textContent = String(d).padStart(2,'0');
+      hrsEl.textContent = String(h).padStart(2,'0');
+      minEl.textContent = String(m).padStart(2,'0');
+      secEl.textContent = String(s).padStart(2,'0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    // Confetti on load
+    window.addEventListener('load', () => {
+      confetti({ spread: 60, origin: { y: 0.6 } });
+    });
+    // Love letter toggle + confetti
+    const btn = document.getElementById('open-letter'),
+          letter = document.getElementById('love-letter');
+    btn.addEventListener('click', () => {
+      letter.classList.toggle('visible');
+      confetti({ particleCount: 120, spread: 100 });
+    });
+    // Heart trail cursor
+    document.addEventListener('mousemove', e => {
+      const heart = document.createElement('div');
+      heart.className = 'cursor-heart';
+      heart.style.left = e.pageX + 'px';
+      heart.style.top = e.pageY + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 800);
+    });
+  </script>
+</body>
+</html>
